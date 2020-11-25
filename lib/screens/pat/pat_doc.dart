@@ -77,8 +77,7 @@ class _pathomescreenState extends State<pathomescreen> {
                     //_appoinmentCard(),
                     _areaSpecialistsText(),
                     _specialistsCardInfo1(),
-                    _specialistsCardInfo2(),
-                    _specialistsCardInfo3(),
+
 
                     //_specialistsCardInfo(),
                   ],
@@ -260,16 +259,16 @@ class _pathomescreenState extends State<pathomescreen> {
                 children: <Widget>[
                   RichText(
                     text: TextSpan(
-                      text: 'Wellness\n',
+                      text: '\n',
                       style: TextStyle(
                         color: Colors.purple,
-                        fontSize: 15,
+                        fontSize: 12,
                         fontWeight: FontWeight.w400,
                         height: 1.3,
                       ),
                       children: <TextSpan>[
                         TextSpan(
-                          text: 'Dr Ayor Kruger',
+                          text: 'Doc1',
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 20,
@@ -277,19 +276,19 @@ class _pathomescreenState extends State<pathomescreen> {
                           ),
                         ),
                         TextSpan(
-                          text: '\n',
+                          text:  '\n' ,
                           style: TextStyle(
                             color: Colors.black45,
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w600,
                             fontSize: 15,
                           ),
                         ),
                         TextSpan(
-                          text: '9856376487',
+                          text: 'dept',
                           style: TextStyle(
-                            color: Colors.black38,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 15,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
                           ),
                         ),
                       ],
@@ -297,33 +296,6 @@ class _pathomescreenState extends State<pathomescreen> {
                   ),
                   SizedBox(
                     height: 6.0,
-                  ),
-                  RaisedButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>bookdoc()),);
-                    },
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(80.0)),
-                    padding: const EdgeInsets.all(0.0),
-                    child: Ink(
-                      decoration: const BoxDecoration(
-                        gradient: purpleGradient,
-                        borderRadius: BorderRadius.all(Radius.circular(80.0)),
-                      ),
-                      child: Container(
-                        constraints: const BoxConstraints(
-                            minWidth: 100.0,
-                            minHeight: 36.0), // min sizes for Material buttons
-                        alignment: Alignment.center,
-                        child: const Text(
-                          'Book Visit',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              fontSize: 16,
-                              color: Colors.white),
-                        ),
-                      ),
-                    ),
                   ),
                 ],
               ),
@@ -338,238 +310,7 @@ class _pathomescreenState extends State<pathomescreen> {
       ),
     );
   }
-  Widget _specialistsCardInfo2() {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 18.0),
-      margin: EdgeInsets.only(
-        bottom: 20.0,
-      ),
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12.0),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              spreadRadius: 1.0,
-              blurRadius: 6.0,
-            ),
-          ]),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              CircleAvatar(
-                backgroundColor: Color(0xFFD9D9D9),
-                backgroundImage: NetworkImage(USER_IMAGE),
-                radius: 36.0,
-              ),
-              SizedBox(
-                width: 10.0,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  RichText(
-                    text: TextSpan(
-                      text: 'Neurologist\n',
-                      style: TextStyle(
-                        color: Colors.purple,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w400,
-                        height: 1.3,
-                      ),
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: 'Dr Satheesh K',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        TextSpan(
-                          text: '\n',
-                          style: TextStyle(
-                            color: Colors.black45,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 15,
-                          ),
-                        ),
-                        TextSpan(
-                          text: '8723560158',
-                          style: TextStyle(
-                            color: Colors.black38,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 15,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 6.0,
-                  ),
-                  RaisedButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>bookdoc()),);
-                    },
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(80.0)),
-                    padding: const EdgeInsets.all(0.0),
-                    child: Ink(
-                      decoration: const BoxDecoration(
-                        gradient: purpleGradient,
-                        borderRadius: BorderRadius.all(Radius.circular(80.0)),
-                      ),
-                      child: Container(
-                        constraints: const BoxConstraints(
-                            minWidth: 100.0,
-                            minHeight: 36.0), // min sizes for Material buttons
-                        alignment: Alignment.center,
-                        child: const Text(
-                          'Book Visit',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              fontSize: 16,
-                              color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          //Icon(
-          // LineAwesomeIcons.heart,
-          //  color: lightColor,
-          //  size: 36,
-          //),
-        ],
-      ),
-    );
-  }
-  Widget _specialistsCardInfo3() {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 18.0),
-      margin: EdgeInsets.only(
-        bottom: 20.0,
-      ),
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12.0),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              spreadRadius: 1.0,
-              blurRadius: 6.0,
-            ),
-          ]),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              CircleAvatar(
-                backgroundColor: Color(0xFFD9D9D9),
-                backgroundImage: NetworkImage(USER_IMAGE),
-                radius: 36.0,
-              ),
-              SizedBox(
-                width: 10.0,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  RichText(
-                    text: TextSpan(
-                      text: 'Psychiatrist\n',
-                      style: TextStyle(
-                        color: Colors.purple,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w400,
-                        height: 1.3,
-                      ),
-                      children: <TextSpan>[
-                        TextSpan(
-                          text: 'Dr Veena G',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        TextSpan(
-                          text: '\n',
-                          style: TextStyle(
-                            color: Colors.black45,
-                            fontWeight: FontWeight.w400,
-                            fontSize: 15,
-                          ),
-                        ),
-                        TextSpan(
-                          text: '7834261987',
-                          style: TextStyle(
-                            color: Colors.black38,
-                            fontWeight: FontWeight.w800,
-                            fontSize: 15,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 6.0,
-                  ),
-                  RaisedButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>bookdoc()),);
-                    },
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(80.0)),
-                    padding: const EdgeInsets.all(0.0),
-                    child: Ink(
-                      decoration: const BoxDecoration(
-                        gradient: purpleGradient,
-                        borderRadius: BorderRadius.all(Radius.circular(80.0)),
-                      ),
-                      child: Container(
-                        constraints: const BoxConstraints(
-                            minWidth: 100.0,
-                            minHeight: 36.0), // min sizes for Material buttons
-                        alignment: Alignment.center,
-                        child: const Text(
-                          'Book Visit',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              fontSize: 16,
-                              color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          //Icon(
-          // LineAwesomeIcons.heart,
-          //  color: lightColor,
-          //  size: 36,
-          //),
-        ],
-      ),
-    );
-  }
+
 
 
 }

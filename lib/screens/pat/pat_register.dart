@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hospital/data/database-helper.dart';
 import 'package:hospital/models/user.dart';
+import 'package:hospital/screens/pat/patlogin.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -14,25 +16,52 @@ class _RegisterPageState  extends State<RegisterPage> {
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   String _name, _username, gender, dept, _password;
 
-  int phno, age;
+  int  phno,age;
 
 
   @override
   Widget build(BuildContext context) {
     _ctx = context;
-    var loginBtn = new RaisedButton(
-      onPressed: _submit,
+    var loginBtn =  Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ButtonTheme(
+        padding: EdgeInsets.only(),
+        buttonColor: Colors.white70,
+        height: 50,
+        minWidth: 350,
+        child: RaisedButton(
+          child: Text(
+            'Register',
+            style: TextStyle(
+              color: Colors.teal[800],
+              fontSize: 20,
+            ),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          onPressed: () {
+            _submit();
 
-      child: new Text("Register"),
-      color: Colors.green,
+          },
+        ),
+      ),
     );
+
 
 
     var loginForm = new Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         new Text(
-          "Login",
+          " \n Register",
+          style: GoogleFonts.lato(
+              textStyle:TextStyle(
+                color: Colors.teal[800],
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              )
+          ),
           textScaleFactor: 2.0,
         ),
         new Form(
@@ -73,8 +102,8 @@ class _RegisterPageState  extends State<RegisterPage> {
                   onSaved: (val) => _password = val,
                   decoration: new InputDecoration(labelText: "Password"),
                   validator: (String _password) {
-                    if (_password.length != 8 && _password.isEmpty)
-                      return 'Password length should be 8';
+                    if (_password.length <8 )
+                      return 'Invalid Password';
                     else
                       return null;
                   },
@@ -116,7 +145,7 @@ class _RegisterPageState  extends State<RegisterPage> {
                   onSaved: (val) => phno = int.parse(val),
                   decoration: new InputDecoration(labelText: "phone Number"),
                   validator: (String phno) {
-                    if (phno.length != 10 && phno.isEmpty)
+                    if (phno.length != 10 )
                       return 'Invalid mobile number';
                     else
                       return null;
@@ -146,9 +175,7 @@ class _RegisterPageState  extends State<RegisterPage> {
 
     return new Scaffold(
         resizeToAvoidBottomInset: false,
-        appBar: new AppBar(
-          title: new Text("Register"),
-        ),
+
         key: scaffoldKey,
         body: SingleChildScrollView(
           child: new Container(
@@ -173,11 +200,11 @@ class _RegisterPageState  extends State<RegisterPage> {
       setState(() {
         _isLoading = true;
         form.save();
-        var user = new User(_name, _username, _password, null);
+        var user = new User(_name, _username, _password,phno,dept, null);
         var db = new DatabaseHelper();
         db.saveUser(user);
         _isLoading = false;
-        Navigator.of(context).pushNamed("/login");
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage(_name,_username,gender,dept)),);
         if (formKey.currentState.validate()) {}
       });
     }

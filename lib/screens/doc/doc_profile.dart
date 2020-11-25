@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 class docprofile extends StatefulWidget {
+  final String name,username,gender,dept;
+  const docprofile(this.name,this.username,this.gender,this.dept);
   @override
   _docprofileState createState() => _docprofileState();
 }
-final name='Satheesh';
-final dept='ortho';
-final mobno ='9355477354';
-final age='32';
+
 const mainBgColor = Color(0xFFf2f2f2);
 const darkColor = Color(0xFF2A0B35);
 const midColor = Color(0xFF522349);
@@ -145,7 +144,7 @@ class _docprofileState extends State<docprofile> {
                       ),
                       children: <TextSpan>[
                         TextSpan(
-                          text: '$name',
+                          text: widget.name,
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 16,
@@ -205,7 +204,7 @@ class _docprofileState extends State<docprofile> {
                 children: <Widget>[
                   RichText(
                     text: TextSpan(
-                      text: 'Age\n',
+                      text: 'Username\n',
                       style: TextStyle(
                         color: Colors.purple,
                         fontSize: 22,
@@ -214,7 +213,7 @@ class _docprofileState extends State<docprofile> {
                       ),
                       children: <TextSpan>[
                         TextSpan(
-                          text: '$age',
+                          text: widget.username,
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 16,
@@ -274,7 +273,7 @@ class _docprofileState extends State<docprofile> {
                 children: <Widget>[
                   RichText(
                     text: TextSpan(
-                      text: 'Department\n',
+                      text:'Gender\n',
                       style: TextStyle(
                         color: Colors.purple,
                         fontSize: 22,
@@ -283,7 +282,7 @@ class _docprofileState extends State<docprofile> {
                       ),
                       children: <TextSpan>[
                         TextSpan(
-                          text: '$dept',
+                          text: widget.gender,
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 16,
@@ -343,7 +342,7 @@ class _docprofileState extends State<docprofile> {
                 children: <Widget>[
                   RichText(
                     text: TextSpan(
-                      text: 'Contact no:\n',
+                      text: 'Department\n',
                       style: TextStyle(
                         color: Colors.purple,
                         fontSize: 22,
@@ -352,7 +351,7 @@ class _docprofileState extends State<docprofile> {
                       ),
                       children: <TextSpan>[
                         TextSpan(
-                          text: '$mobno',
+                          text: widget.dept,
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 16,

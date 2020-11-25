@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hospital/data/database-helper.dart';
+import 'package:hospital/models/user.dart';
 import 'med_presc.dart';
+import 'package:sqflite/sqflite.dart';
 import 'mood.dart';
 class docpat extends StatefulWidget {
   @override
@@ -28,11 +31,30 @@ const redGradient = LinearGradient(
 
 const USER_IMAGE='https://cdn4.iconfinder.com/data/icons/people-avatar-flat-1/64/girl_chubby_beautiful_people_woman_lady_avatar-512.png';
 class _docpatState extends State<docpat> {
+  DatabaseHelper databaseHelper = DatabaseHelper();
+  List<User> userlist=new List();
+  int count=0;
+  void initState() {
+    super.initState();
+
+    databaseHelper.getAllUser().then((users) {
+      setState(() {
+        users.forEach((user) {
+          userlist.add(User.fromMap(user));
+        });
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (userlist == null) {
+      userlist = List<User>();
+    }
     return Scaffold(
       backgroundColor: mainBgColor,
       body: SingleChildScrollView(
+
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
@@ -56,14 +78,15 @@ class _docpatState extends State<docpat> {
                   children: <Widget>[
                     _areaSpecialistsText(),
                     _specialistsCardInfo1(),
-                    _specialistsCardInfo2(),
-                    _specialistsCardInfo3(),
+                    showpatients(),
+
                   ],
                 ),
               ),
             ),
           ],
         ),
+
       ),
     );
   }
@@ -141,7 +164,7 @@ class _docpatState extends State<docpat> {
 
   Widget _areaSpecialistsText() {
     return Container(
-      margin: EdgeInsets.only(top: 20.0, bottom: 20.0),
+      margin: EdgeInsets.only(top: 10.0, bottom: 20.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -165,7 +188,6 @@ class _docpatState extends State<docpat> {
       ),
     );
   }
-
   Widget _specialistsCardInfo1() {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 18.0),
@@ -213,213 +235,27 @@ class _docpatState extends State<docpat> {
                       ),
                       children: <TextSpan>[
                         TextSpan(
-                          text: 'Krishna\n',
+                          text: 'pat1',
                           style: TextStyle(
                             color: Colors.black,
-                            fontSize: 16,
+                            fontSize: 20,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 6.0,
-                  ),
-                  RaisedButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>medpresc()),);
-
-                    },
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(80.0)),
-                    padding: const EdgeInsets.all(0.0),
-                    child: Ink(
-                      decoration: const BoxDecoration(
-                        gradient: purpleGradient,
-                        borderRadius: BorderRadius.all(Radius.circular(80.0)),
-                      ),
-                      child: Container(
-                        constraints: const BoxConstraints(
-                            minWidth: 150.0,
-                            minHeight: 45.0), // min sizes for Material buttons
-                        alignment: Alignment.center,
-                        child: const Text(
-                          'Prescribe Medicine',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              fontSize: 16,
-                              color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          //Icon(
-          // LineAwesomeIcons.heart,
-          //  color: lightColor,
-          //  size: 36,
-          //),
-        ],
-      ),
-    );
-  }
-  Widget _specialistsCardInfo2() {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 18.0),
-      margin: EdgeInsets.only(
-        bottom: 20.0,
-      ),
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12.0),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              spreadRadius: 1.0,
-              blurRadius: 6.0,
-            ),
-          ]),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              CircleAvatar(
-                backgroundColor: Color(0xFFD9D9D9),
-                backgroundImage: NetworkImage(USER_IMAGE),
-                radius: 36.0,
-              ),
-              SizedBox(
-                width: 10.0,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  RichText(
-                    text: TextSpan(
-                      text: '\n',
-                      style: TextStyle(
-                        color: Colors.purple,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        height: 1.3,
-                      ),
-                      children: <TextSpan>[
                         TextSpan(
-                          text: 'vidhya P\n',
+                          text:  '\n' ,
                           style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
+                            color: Colors.black45,
                             fontWeight: FontWeight.w600,
+                            fontSize: 15,
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 6.0,
-                  ),
-                  RaisedButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>medpresc()),);
-
-                    },
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(80.0)),
-                    padding: const EdgeInsets.all(0.0),
-                    child: Ink(
-                      decoration: const BoxDecoration(
-                        gradient: purpleGradient,
-                        borderRadius: BorderRadius.all(Radius.circular(80.0)),
-                      ),
-                      child: Container(
-                        constraints: const BoxConstraints(
-                            minWidth: 150.0,
-                            minHeight: 45.0), // min sizes for Material buttons
-                        alignment: Alignment.center,
-                        child: const Text(
-                          'Prescribe Medicine',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              fontSize: 16,
-                              color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          //Icon(
-          // LineAwesomeIcons.heart,
-          //  color: lightColor,
-          //  size: 36,
-          //),
-        ],
-      ),
-    );
-  }
-  Widget _specialistsCardInfo3() {
-    return Container(
-      padding: EdgeInsets.symmetric(vertical: 14.0, horizontal: 18.0),
-      margin: EdgeInsets.only(
-        bottom: 20.0,
-      ),
-      decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12.0),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              spreadRadius: 1.0,
-              blurRadius: 6.0,
-            ),
-          ]),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              CircleAvatar(
-                backgroundColor: Color(0xFFD9D9D9),
-                backgroundImage: NetworkImage(USER_IMAGE),
-                radius: 36.0,
-              ),
-              SizedBox(
-                width: 10.0,
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  RichText(
-                    text: TextSpan(
-                      text: '\n',
-                      style: TextStyle(
-                        color: Colors.purple,
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        height: 1.3,
-                      ),
-                      children: <TextSpan>[
                         TextSpan(
-                          text: 'Sam\n',
+                          text: 'dept',
                           style: TextStyle(
                             color: Colors.black,
-                            fontSize: 16,
                             fontWeight: FontWeight.w600,
+                            fontSize: 18,
                           ),
                         ),
                       ],
@@ -427,33 +263,6 @@ class _docpatState extends State<docpat> {
                   ),
                   SizedBox(
                     height: 6.0,
-                  ),
-                  RaisedButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>medpresc()),);
-                    },
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(80.0)),
-                    padding: const EdgeInsets.all(0.0),
-                    child: Ink(
-                      decoration: const BoxDecoration(
-                        gradient: purpleGradient,
-                        borderRadius: BorderRadius.all(Radius.circular(80.0)),
-                      ),
-                      child: Container(
-                        constraints: const BoxConstraints(
-                            minWidth: 150.0,
-                            minHeight: 45.0), // min sizes for Material buttons
-                        alignment: Alignment.center,
-                        child: const Text(
-                          'Prescribe Medicine',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w300,
-                              fontSize: 16,
-                              color: Colors.white),
-                        ),
-                      ),
-                    ),
                   ),
                 ],
               ),
@@ -468,6 +277,28 @@ class _docpatState extends State<docpat> {
       ),
     );
   }
+  ListView showpatients() {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: count,
+      itemBuilder: (BuildContext context, int position) {
+        return Card(
+          color: Colors.white,
+          elevation: 2.0,
+          child: ListTile(
+            leading: CircleAvatar(
+              backgroundColor: Colors.amber,
+
+            ),
+            title: Text(this.userlist[position].name,
+                style: TextStyle(fontWeight: FontWeight.bold)),
+            subtitle: Text(this.userlist[position].dept),
+          ),
+        );
+      },
+    );
+  }
+
 
 
 

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 class patprofile extends StatefulWidget {
+  final String patname,patuser,patgender,patdept;
+  const patprofile(this.patname,this.patuser,this.patgender,this.patdept);
   @override
   _patprofileState createState() => _patprofileState();
 }
-final name='Sindhu';
-final dept='Neurology';
-final mobno ='9355477354';
-final age='49';
 const mainBgColor = Color(0xFFf2f2f2);
 const darkColor = Color(0xFF2A0B35);
 const midColor = Color(0xFF522349);
@@ -144,7 +142,7 @@ class _patprofileState extends State<patprofile> {
                       ),
                       children: <TextSpan>[
                         TextSpan(
-                          text: '$name',
+                          text: widget.patname,
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 16,
@@ -204,7 +202,7 @@ class _patprofileState extends State<patprofile> {
                 children: <Widget>[
                   RichText(
                     text: TextSpan(
-                      text: 'Age\n',
+                      text: 'Username\n',
                       style: TextStyle(
                         color: Colors.red,
                         fontSize: 22,
@@ -213,7 +211,7 @@ class _patprofileState extends State<patprofile> {
                       ),
                       children: <TextSpan>[
                         TextSpan(
-                          text: '$age',
+                          text: widget.patuser,
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 16,
@@ -273,7 +271,7 @@ class _patprofileState extends State<patprofile> {
                 children: <Widget>[
                   RichText(
                     text: TextSpan(
-                      text: 'Department\n',
+                      text: 'Gender\n',
                       style: TextStyle(
                         color: Colors.red,
                         fontSize: 22,
@@ -282,7 +280,7 @@ class _patprofileState extends State<patprofile> {
                       ),
                       children: <TextSpan>[
                         TextSpan(
-                          text: '$dept',
+                          text: widget.patgender,
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 16,
@@ -342,7 +340,7 @@ class _patprofileState extends State<patprofile> {
                 children: <Widget>[
                   RichText(
                     text: TextSpan(
-                      text: 'Contact no:\n',
+                      text: 'Department\n',
                       style: TextStyle(
                         color: Colors.red,
                         fontSize: 22,
@@ -351,7 +349,7 @@ class _patprofileState extends State<patprofile> {
                       ),
                       children: <TextSpan>[
                         TextSpan(
-                          text: '$mobno',
+                          text: widget.patdept,
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 16,

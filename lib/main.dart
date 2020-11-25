@@ -16,18 +16,18 @@ import 'package:hospital/screens/pat/book_view.dart';
 void main() => runApp(MyApp());
 
 final routes = {
-  '/login': (BuildContext context) => new LoginPage(),
+  '/login': (BuildContext context) => new LoginPage('','','',''),
   '/home': (BuildContext context) =>  pathome(),
   '/register': (BuildContext context) => new RegisterPage(),
-  '/': (BuildContext context) => new LoginPage(),
+  '/': (BuildContext context) => new LoginPage('','','',''),
   '/pathome':(BuildContext context) => new pathomescreen(),
   '/mood':(BuildContext context) => new MoodsSelector(),
   '/bookdoc':(BuildContext context) => new bookdoc(),
-  '/viewdoc':(BuildContext context) => new viewdoc(),
-  '/patprofile':(BuildContext context) => new patprofile(),
-  '/l':(BuildContext context) => new LoginPage1(),
+  '/viewdoc':(BuildContext context) => new viewdoc('',''),
+  '/patprofile':(BuildContext context) => new patprofile('','','',''),
+  '/l':(BuildContext context) => new LoginPage1('','','',''),
   '/register1':(BuildContext context) => new RegisterPage1(),
-  '/home1':(BuildContext context) => new dochome(),
+  '/home1':(BuildContext context) => new dochome('','','',''),
 
 
 

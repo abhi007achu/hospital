@@ -3,8 +3,13 @@ import 'package:hospital/data/database-helper.dart';
 import 'package:hospital/models/user.dart';
 import 'package:hospital/screens/doc/doclogin.dart';
 import 'package:hospital/screens/pat/loginpresenter.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:hospital/screens/pat/pat_home.dart';
+import 'package:hospital/screens/pat/pat_profile.dart';
 
 class LoginPage extends StatefulWidget {
+  final String name,username,gender,dept;
+  const LoginPage(this.name,this.username,this.gender,this.dept);
   @override
   _LoginPageState createState() => new _LoginPageState();
 }
@@ -28,7 +33,7 @@ class _LoginPageState extends State<LoginPage> implements LoginPageContract {
   }
   void _doc() {
 
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage1()),);
+    Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginPage1('','','','')),);
 
   }
 
@@ -54,29 +59,97 @@ class _LoginPageState extends State<LoginPage> implements LoginPageContract {
   @override
   Widget build(BuildContext context) {
     _ctx = context;
-    var loginBtn = new RaisedButton(
-      onPressed: _submit,
-      child: new Text("Login"),
-      color: Colors.green,
+    var loginBtn = Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ButtonTheme(
+        padding: EdgeInsets.only(),
+        buttonColor: Colors.white70,
+        height: 50,
+        minWidth:350,
+        child: RaisedButton(
+          child: Text(
+            'Login',
+            style: TextStyle(
+              color: Colors.teal[800],
+              fontSize: 20,
+            ),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          onPressed: () {
+            _submit();
+
+          },
+        ),
+      ),
     );
-    var registerBtn = new RaisedButton(
-      padding: const EdgeInsets.all(10.0),
-      onPressed: _register,
-      child: new Text("Register"),
-      color: Colors.green,
+
+    var registerBtn = Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ButtonTheme(
+        padding: EdgeInsets.only(),
+        buttonColor: Colors.white70,
+        height: 50,
+        minWidth: 350,
+        child: RaisedButton(
+          child: Text(
+            'Register',
+            style: TextStyle(
+              color: Colors.teal[800],
+              fontSize: 20,
+            ),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          onPressed: () {
+            _register();
+
+          },
+        ),
+      ),
     );
-    var docBtn = new RaisedButton(
-      onPressed: _doc,
-      child: new Text("Login as Doctor"),
-      color: Colors.green,
+    var docBtn = Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: ButtonTheme(
+        padding: EdgeInsets.only(),
+        buttonColor: Colors.white70,
+        height: 50,
+        minWidth: 350,
+        child: RaisedButton(
+          child: Text(
+            'Login as Doctor',
+            style: TextStyle(
+              color: Colors.teal[800],
+              fontSize: 20,
+            ),
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(30),
+          ),
+          onPressed: () {
+            _doc();
+
+          },
+        ),
+      ),
     );
     var loginForm = new Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
         new Text(
-          " Login",
+          " \n E-CARE ",
+          style: GoogleFonts.acme(
+              textStyle:TextStyle(
+                color: Colors.teal[800],
+                fontWeight: FontWeight.bold,
+                fontSize: 30,
+              )
+          ),
           textScaleFactor: 2.0,
         ),
+
         new Form(
           key: formKey,
           child: new Column(
@@ -98,7 +171,7 @@ class _LoginPageState extends State<LoginPage> implements LoginPageContract {
                   onSaved: (val) => _password = val,
                   decoration: new InputDecoration(labelText: "Password"),
                   validator: (String _password) {
-                    if (_password.length !=8 && _password.isEmpty) return 'Password length should be 8';
+                    if (_password.length <8) return 'Invalid Password';
                     else return null;
                   },
                 ),
@@ -119,11 +192,9 @@ class _LoginPageState extends State<LoginPage> implements LoginPageContract {
 
     return new Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: new AppBar(
-        title: new Text("Login Page"),
-      ),
       key: scaffoldKey,
       body: new Container(
+
         child: new Center(
           child: loginForm,
         ),
@@ -153,7 +224,7 @@ class _LoginPageState extends State<LoginPage> implements LoginPageContract {
     });
     if(user.flaglogged == "logged"){
       print("Logged");
-      Navigator.of(context).pushNamed("/home");
+      Navigator.push(context, MaterialPageRoute(builder: (context)=>pathome(pname: '',pusername: '',pgender: '',pdept: '')),);
     }else{
       print("Not Logged");
     }

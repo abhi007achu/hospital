@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hospital/screens/pat/book_doc.dart';
 import 'package:hospital/screens/pat/book_view.dart';
 import 'package:hospital/screens/pat/pat_doc.dart';
 import 'package:hospital/screens/pat/pat_profile.dart';
@@ -7,9 +8,10 @@ import 'package:line_awesome_icons/line_awesome_icons.dart';
 
 
 class pathome extends StatefulWidget {
-  pathome({Key key, this.title}) : super(key: key);
+  final String pname,pusername,pgender,pdept;
+  pathome({ this.pname,this.pusername,this.pgender,this.pdept}) ;
 
-  final String title;
+
 
   @override
   _pathomeState createState() => _pathomeState();
@@ -19,8 +21,8 @@ class _pathomeState extends State<pathome> {
   int _selectedIndex = 0;
   final List<Widget>_children = [
     pathomescreen(),
-    viewdoc(),
-    patprofile()
+    bookdoc(),
+    patprofile('','','','')
 
   ];
 

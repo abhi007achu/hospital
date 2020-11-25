@@ -5,6 +5,8 @@ import 'dart:async';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:hospital/models/user1.dart';
+import 'package:hospital/models/book.dart';
+import 'package:hospital/models/med.dart';
 
 class DatabaseHelper {
   static final DatabaseHelper _instance = new DatabaseHelper.internal();
@@ -13,13 +15,21 @@ class DatabaseHelper {
   static Database _db;
   final String tableUser = "User";
   final String tableUser1 = "User1";
+  final String tableBook = "Book";
+  final String tablePresc = "Presc";
   final String columnName = "name";
   final String columnUserName = "username";
   final String columnPassword = "password";
+  final String columnDept = "dept";
   final String columnName1 = "name1";
   final String columnUserName1 = "username1";
   final String columnPassword1 = "password1";
-
+  final String columnBookby = "bookby";
+  final String columnBookfor = "bookfor";
+  final String columnBookdate = "bookdate";
+  final String columnPrescby = "prescby";
+  final String columnPrescfor = "prescfor";
+  final String columnMed = "med";
 
   Future<Database> get db async {
     if (_db != null) {
@@ -33,18 +43,25 @@ class DatabaseHelper {
 
   initDb() async {
     Directory documentDirectory = await getApplicationDocumentsDirectory();
-    String path = join(documentDirectory.path, "main.db");
-    var ourDb = await openDatabase(path, version: 1, onCreate: _onCreate);
+    String path = join(documentDirectory.path, "hos.db");
+    var ourDb = await openDatabase(path, version: 2, onCreate: _onCreate);
     return ourDb;
   }
 
   void _onCreate(Database db, int version) async {
     await db.execute(
-        "CREATE TABLE User(id INTEGER PRIMARY KEY, name TEXT, username TEXT, password TEXT, flaglogged TEXT)");
-    print("Table is created");
+        "CREATE TABLE User(id INTEGER PRIMARY KEY, name TEXT, username TEXT, password TEXT,phno INTEGER,dept TEXT, flaglogged TEXT)");
+    print("Patient is created");
     await db.execute(
-        "CREATE TABLE User1(id1 INTEGER PRIMARY KEY, name1 TEXT, username1 TEXT, password1 TEXT, flaglogged1 TEXT)");
-    print("Table is created");
+        "CREATE TABLE User1(id1 INTEGER PRIMARY KEY, name1 TEXT, username1 TEXT, password1 TEXT,phno1 INTEGER,dept1 TEXT, flaglogged1 TEXT)");
+    print("Doctor is created");
+    await db.execute(
+        "CREATE TABLE Book(bid INTEGER PRIMARY KEY, bookby TEXT, bookfor TEXT, bookdate TEXT)");
+    print("Booking is created");
+    await db.execute(
+        "CREATE TABLE Presc(pid INTEGER PRIMARY KEY, prescby TEXT, prescfor TEXT, med TEXT)");
+    print("Prescription is created");
+
 
   }
 
@@ -81,6 +98,13 @@ class DatabaseHelper {
       return null;
     }
   }
+  Future<List> getAllUser() async {
+    var dbClient = await db;
+    var result = await dbClient.query(tableUser, columns: [columnName, columnDept]);
+//    var result = await dbClient.rawQuery('SELECT * FROM $tableNote');
+
+    return result.toList();
+  }
   //doc table
   //insertion
   Future<int> saveUser1(User1 user1) async {
@@ -111,6 +135,72 @@ class DatabaseHelper {
     if (maps.length > 0) {
       print("User1 Exist !!!");
       return user1;
+    }else {
+      return null;
+    }
+  }
+  //Book
+  Future<int> saveBook(Book book) async {
+    var dbClientb = await db;
+    print(book.bookby);
+    int res = await dbClientb.insert("Book", book.toMap());
+    List<Map> list = await dbClientb.rawQuery('SELECT * FROM Book');
+    print(list);
+    return res;
+  }
+
+  //deletion
+  Future<int> deleteBook(Book book) async {
+    var dbClientb = await db;
+    int res = await dbClientb.delete("Book");
+    return res;
+  }
+  Future<Book> selectBook(Book book) async{
+    print("Select Book");
+    print(book.bookby);
+    print(book.bookfor);
+    var dbClientb = await db;
+    List<Map> maps = await dbClientb.query(tableBook,
+        columns: [columnBookby, columnBookfor,columnBookdate ],
+        where: "$columnBookby = ? and $columnBookfor = ?",
+        whereArgs: [book.bookby,book.bookfor]);
+    print(maps);
+    if (maps.length > 0) {
+      print("Book Exist !!!");
+      return book;
+    }else {
+      return null;
+    }
+  }
+//Presc
+  Future<int> savePresc(Presc presc) async {
+    var dbClientp = await db;
+    print(presc.prescby);
+    int res = await dbClientp.insert("Presc", presc.toMap());
+    List<Map> list = await dbClientp.rawQuery('SELECT * FROM Presc');
+    print(list);
+    return res;
+  }
+
+  //deletion
+  Future<int> deletePresc(Presc presc) async {
+    var dbClientp = await db;
+    int res = await dbClientp.delete("Presc");
+    return res;
+  }
+  Future<Presc> selectPresc(Presc presc) async{
+    print("Select Presc");
+    print(presc.prescby);
+    print(presc.prescfor);
+    var dbClientp = await db;
+    List<Map> maps = await dbClientp.query(tablePresc,
+        columns: [columnPrescby, columnPrescfor,columnMed ],
+        where: "$columnPrescby = ? and $columnPrescfor = ?",
+        whereArgs: [presc.prescby,presc.prescfor]);
+    print(maps);
+    if (maps.length > 0) {
+      print("Presc Exist !!!");
+      return presc;
     }else {
       return null;
     }
